@@ -15,7 +15,7 @@
 %  latex_fig(10,16,30,[0,20,-0.1,1.1],5, 1.5,'r',3,[0 0 0],[0.4 0 0],{'off','on'},false)
 
 function latex_fig(font_size,number_font_size,latex_font_size,axis_limit,...
-                   f_width,f_height,linecolor,linewidth,xlabel_pos,ylabel_pos,visibility,grid_on,leg_font_size,leg_line_width)
+                   f_width,f_height,linecolor,linewidth,linestyle,xlabel_pos,ylabel_pos,visibility,grid_on,leg_font_size,leg_line_width)
 % axis handle
 xlabh = get(gca,'XLabel');
 ylabh = get(gca,'YLabel');
@@ -37,6 +37,7 @@ line=findobj(gca,'Type','line');
 for i=1:length(line)
 set(line(i,1),'LineWidth',linewidth(1,i));
 set(line(i,1),'Color',linecolor{1,i})
+set(line(i,1),'LineStyle',linestyle{1,i})
 end
 
 % set legend properties
