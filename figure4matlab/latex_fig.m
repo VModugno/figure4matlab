@@ -35,9 +35,19 @@ end
 % set line properties
 line=findobj(gca,'Type','line');
 for i=1:length(line)
-set(line(i,1),'LineWidth',linewidth(1,i));
-set(line(i,1),'Color',linecolor{1,i})
-set(line(i,1),'LineStyle',linestyle{1,i})
+   if(isempty(linewidth)==0)
+      if(length(linewidth)==1)
+         set(line(i,1),'LineWidth',linewidth);
+      else
+         set(line(i,1),'LineWidth',linewidth(1,i));
+      end
+   end
+   if(isempty(linecolor)==0)
+      set(line(i,1),'Color',linecolor{1,i})
+   end
+   if(isempty(linestyle)==0)
+      set(line(i,1),'LineStyle',linestyle{1,i})
+   end
 end
 
 % set legend properties
@@ -45,23 +55,24 @@ if(isempty(leg) == 0)
     set(leg,'FontSize',leg_font_size);
     set(leg,'LineWidth',leg_line_width);
 end
-font_rate=10/font_size;
-set(gcf,'Position',[100   200   round(f_width*font_rate*144)   round(f_height*font_rate*144)])
 
 % change position of label
 set(xlabh,'Position',get(xlabh,'Position') + xlabel_pos)
 set(ylabh,'Position',get(ylabh,'Position') + ylabel_pos)
 
-% change visibility 
-set(xlabh,'Visible',visibility{1});
-set(ylabh,'Visible',visibility{2});
-
 % change fontsize
 set(xlabh,'FontSize',latex_font_size);
 set(ylabh,'FontSize',latex_font_size);
 
+% change visibility 
+set(xlabh,'Visible',visibility{1});
+set(ylabh,'Visible',visibility{2});
+
 % set the dimension of the number of the graph
 set(gca,'fontsize',number_font_size);
+
+font_rate=10/font_size;
+set(gcf,'Position',[100   200   round(f_width*font_rate*144)   round(f_height*font_rate*144)])
 
 % change background color to white
 set(gcf,'color','w');
