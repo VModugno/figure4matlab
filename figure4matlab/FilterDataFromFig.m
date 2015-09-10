@@ -12,12 +12,15 @@ function FilterDataFromFig()
     end
 
     all_yy = [];
-    for i=1:length(Data)
-        yy = smooth(Data{i}.Y);
+    for i=1:length(line)
+        yy = smooth(Data{length(line) + 1 - i}.Y);
         all_yy = [all_yy  yy];
     end
 
-    plot(all_yy);
-
+    
+    figure; hold on;
+    grid on;
+    
+    plot(Data{1}.X,all_yy);
 
 end
