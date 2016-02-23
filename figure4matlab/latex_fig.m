@@ -4,6 +4,7 @@
 % axis_limit: 
 % f_width: the figure width (in inches)
 % f_height: the figure height (in inches)
+% active_line : activate the lines properties (for graph only)
 % linewidth:
 % linecolor:
 % xlabel_pos: position of x label [ x y z] respect current position
@@ -12,10 +13,10 @@
 % grid_on control the presence of the grid. true or false
 
 %sample usage
-%  latex_fig(10,16,30,[0,20,-0.1,1.1],5, 1.5,'r',3,[0 0 0],[0.4 0 0],{'off','on'},false)
+%  latex_fig(10,16,30,[0,20,-0.1,1.1],5, 1.5,true,{'r'},3,{0 0 0},[0.4 0 0],[0.4 0 0],{'on','off'},false,5,5)
 
 function latex_fig(font_size,number_font_size,latex_font_size,axis_limit,...
-                   f_width,f_height,linecolor,linewidth,linestyle,xlabel_pos,ylabel_pos,visibility,grid_on,leg_font_size,leg_line_width)
+                   f_width,f_height,active_line,linecolor,linewidth,linestyle,xlabel_pos,ylabel_pos,visibility,grid_on,leg_font_size,leg_line_width)
 % axis handle
 xlabh = get(gca,'XLabel');
 ylabh = get(gca,'YLabel');
@@ -32,24 +33,27 @@ if(grid_on)
 else
     grid off
 end
-% set line properties
-line=findobj(gca,'Type','line');
-for i=1:length(line)
-   if(isempty(linewidth)==0)
-      if(length(linewidth)==1)
-         set(line(i,1),'LineWidth',linewidth);
-      else
-         set(line(i,1),'LineWidth',linewidth(1,i));
+if(active_line)
+   % set line properties (for graph only)
+   line=findobj(gca,'Type','line');
+   if(~isempty(line)) % check if i have lines around
+      for i=1:length(line)
+         if(isempty(linewidth)==0)
+            if(length(linewidth)==1)
+               set(line(i,1),'LineWidth',linewidth);
+            else
+               set(line(i,1),'LineWidth',linewidth(1,i));
+            end
+         end
+         if(isempty(linecolor)==0)
+            set(line(i,1),'Color',linecolor{1,i})
+         end
+         if(isempty(linestyle)==0)
+            set(line(i,1),'LineStyle',linestyle{1,i})
+         end
       end
    end
-   if(isempty(linecolor)==0)
-      set(line(i,1),'Color',linecolor{1,i})
-   end
-   if(isempty(linestyle)==0)
-      set(line(i,1),'LineStyle',linestyle{1,i})
-   end
 end
-
 % set legend properties
 if(isempty(leg) == 0)
     set(leg,'FontSize',leg_font_size);
