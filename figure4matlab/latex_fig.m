@@ -58,7 +58,10 @@ end
 if(isempty(leg) == 0)
     set(leg,'FontSize',leg_font_size);
     set(leg,'LineWidth',leg_line_width);
+    set(leg,'Interpreter','tex');
 end
+
+
 
 % change position of label
 set(xlabh,'Position',get(xlabh,'Position') + xlabel_pos)
@@ -71,6 +74,10 @@ set(ylabh,'FontSize',latex_font_size);
 % change visibility 
 set(xlabh,'Visible',visibility{1});
 set(ylabh,'Visible',visibility{2});
+
+% set interpreter
+set(xlabh,'Interpreter','latex');
+set(ylabh,'Interpreter','latex');
 
 % set the dimension of the number of the graph
 set(gca,'fontsize',number_font_size);
