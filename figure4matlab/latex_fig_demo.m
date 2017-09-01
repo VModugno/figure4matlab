@@ -16,4 +16,4 @@ set(p,'Color','red','LineWidth',2)
 
 
 % define the features of the image
-latex_fig(10,16,30,[0,20,-0.1,1.1],5, 1.5,true,{'r'},3,{0 0 0},[0.4 0 0],[0.4 0 0],{'on','off'},false,5,5)
+latex_fig(10,16,30,[0,20,-0.1,1.1],5, 1.5,false,{'r'},3,{0 0 0},[0.4 0 0],[0.4 0 0],{'on','off'},false,5,5)
